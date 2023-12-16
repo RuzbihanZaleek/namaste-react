@@ -1,36 +1,56 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const reactHeading = React.createElement('h1', { id: 'heading' }, 'Hello World from React!');
+// React.createElement => ReactElement-JS Object => HTMLElement(render)
 
-const reactRoot = ReactDOM.createRoot(document.getElementById('root2'));
+const heading = React.createElement("h1", {id: "heading"}, "Hello World from React 🚀");
 
-reactRoot.render(reactHeading);
+// JSX = HTML-like or XML-like syntax
+// JSX (transpiled before it reaches the JS) - PARCEL - Babel
+// React Element
+const jsxHeading = (
+  <h1 className='head'>
+    Hello World From JSX ✅
+  </h1>
+);
 
-/*
-    <div id="parent">
-        <div id="child">
-            <h1>I am an h1 Tag1</h1>
-            <h2>I am an h2 Tag2</h2>
-        </div>
-        <div id="child2">
-            <h1>I am an h1 Tag3</h1>
-            <h2>I am an h2 Tag4</h2>
-        </div>
-    </div>
-*/
+// React Functional Component
+const HeadingComponent = () => {
+  return <h1 className='heading'>React Functional Component 1</h1>
+}
 
-const parent = React.createElement('div', { id: 'parent' }, [
-  React.createElement('div', { id: 'child' }, [
-    React.createElement('h1', {}, 'This is React 🚀'),
-    React.createElement('h2', {}, 'I am an h2 Tag2'),
-  ]),
-  React.createElement('div', { id: 'child2' }, [
-    React.createElement('h1', {}, 'I am an h1 Tag3'),
-    React.createElement('h2', {}, 'I am an h2 Tag4'),
-  ]),
-]);
+// Without return statement and in one line
+const HeadingComponent2 = () => <h1 className='heading'>React Functional Component 2</h1>;
 
-const reactRoot2 = ReactDOM.createRoot(document.getElementById('root3'));
+// Normal function with return statement
+const HeadingComponent3 = function () {
+  return (
+    <h1 className='heading'>
+      React Functional Component 3
+    </h1>
+  );
+}
 
-reactRoot2.render(parent);
+const number = 1000;
+
+// Without return, with () and multiple lines
+const HeadingComponent4 = () => (
+  <div id='container'>
+    {/* Component Composition */}
+    <HeadingComponent />
+    <HeadingComponent2 />
+    <HeadingComponent3 />
+    {jsxHeading}
+    <h1>{number}</h1>
+    <h1 className='heading'>
+      React Functional Component 4
+    </h1>
+  </div>
+);
+
+// React Component
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(jsxHeading); // Rendering React Element
+root.render(<HeadingComponent4 />); // Rendering React Component

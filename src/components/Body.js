@@ -33,7 +33,8 @@ const Body = () => {
   if (onlineStatus === false) {
     return (
       <h1>
-        Ooops :(  Looks like you are offline!! Please check your internet connection 🛜 
+        Ooops :( Looks like you are offline!! Please check your internet
+        connection 🛜
       </h1>
     );
   }
@@ -43,41 +44,45 @@ const Body = () => {
     <ShimmerCards />
   ) : (
     <div className="body">
-      <div className="filter">
-        <input
-          type="text"
-          className="search"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-        />
-        <button
-          className="search-btn"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter((res) =>
-              res.info.name.toLowerCase().includes(searchText.toLowerCase())
-            );
+      <div className="flex p-4 gap-5">
+        <div className="flex gap-2">
+          <input
+            type="text"
+            className="border border-solid border-black rounded-md focus:outline-green-600"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="border px-2 rounded-md border-black bg-green-600 text-white"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
 
-            setFilteredRestaurants(filteredList);
-          }}
-        >
-          Search
-        </button>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.3
-            );
+              setFilteredRestaurants(filteredList);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        <div>
+          <button
+            className="border px-2 rounded-md border-black bg-green-600 text-white"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter(
+                (res) => res.info.avgRating > 4.3
+              );
 
-            setFilteredRestaurants(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+              setFilteredRestaurants(filteredList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurants.length === 0 ? (
           <h2>No Results Found</h2>
         ) : (

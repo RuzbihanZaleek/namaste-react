@@ -1,13 +1,16 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { PromotedRestaurantCard } from "./RestaurantCard";
+import { useContext, useEffect, useState } from "react";
 import ShimmerCards from "./ShimmerCards";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const ResCardWithPromotedLabel = PromotedRestaurantCard(RestaurantCard);
+  const { loggedUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -48,7 +51,7 @@ const Body = () => {
         <div className="flex gap-2">
           <input
             type="text"
-            className="border border-solid border-black rounded-md focus:outline-green-600"
+            className="border border-solid border-black rounded-md focus:outline-green-600 px-2"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -81,6 +84,15 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
+        <div>
+          <span>User Name: </span>
+          <input
+            type="text"
+            className="border border-solid border-black rounded-md focus:outline-green-600 px-2"
+            value={loggedUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.length === 0 ? (
@@ -92,7 +104,11 @@ const Body = () => {
               to={"/restaurant/" + restaurant.info.id}
               className="custom-link"
             >
-              <RestaurantCard restaurantData={restaurant} />
+              {restaurant.info.avgRating > 4.5 ? (
+                <ResCardWithPromotedLabel restaurantData={restaurant} />
+              ) : (
+                <RestaurantCard restaurantData={restaurant} />
+              )}
             </Link>
           ))
         )}

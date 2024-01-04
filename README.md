@@ -1,6 +1,7 @@
 # Namaste React 🚀
 
 # Parcel
+
     - Dev Build
     - Local Server
     - HMR - Hot Module Replacement - update the application code in real-time without requiring a full page reload
@@ -18,3 +19,12 @@
     - HTTPs
     - Tree Shaking - remove unused code
     - Different dev and production bundles
+
+# Redux Toolkit
+
+    - Install @reduxjs/toolkit and react-redux
+    - Build our store
+    - Connect our store to our app
+    - Create a (cart) Slice
+    - dispatch (action)
+    - Selector (read data)

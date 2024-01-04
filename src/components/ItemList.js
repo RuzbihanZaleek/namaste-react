@@ -1,6 +1,19 @@
+import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utils/constants";
+import { addItem, removeItem } from "../utils/cartSlice";
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, addButton = true }) => {
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    //dispatch action
+    dispatch(addItem(item));
+  };
+
+  const handleRemoveItem = () => {
+    dispatch(removeItem());
+  };
+
   return (
     <div>
       {items.map((item) => (
@@ -14,7 +27,7 @@ const ItemList = ({ items }) => {
             <span className="text-sm">Rs. {item?.card?.info?.price / 100}</span>
             <span className="text-xs">{item?.card?.info?.description}</span>
           </div>
-          <div className="flex justify-center">
+          <div className="flex flex-col justify-center items-center">
             <div className="w-[150px] shadow-md">
               <img
                 className="border rounded-lg"
@@ -22,9 +35,24 @@ const ItemList = ({ items }) => {
                 src={CDN_URL + item?.card?.info?.imageId}
               />
             </div>
-            {/* <div className="absolute flex w-[130px] py-1 items-center bg-white border border-green-600 rounded mt-[90px]">
-              <button className="mx-auto font-semibold">ADD</button>
-            </div> */}
+            <div className="flex w-[130px] py-1 items-center bg-white border border-black hover:border-green-600 rounded mt-2">
+              {addButton && (
+                <button
+                  className="mx-auto font-semibold"
+                  onClick={() => handleAddItem(item)}
+                >
+                  Add ➕
+                </button>
+              )}
+              {!addButton && (
+                <button
+                  className="mx-auto font-semibold"
+                  onClick={() => handleRemoveItem()}
+                >
+                  Remove ➖
+                </button>
+              )}
+            </div>
           </div>
         </div>
       ))}

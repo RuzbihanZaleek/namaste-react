@@ -28,3 +28,13 @@
     - Create a (cart) Slice
     - dispatch (action)
     - Selector (read data)
+
+# Setting up Testing in our app
+
+    - install React Testing Library
+    - Install Jest
+    - Install Babel dependencies (get from Jest website)
+    - Configure Babel (in babel.config.js)
+    - Configure parcel config file to disable default babel transpilation (.parcelrc get dependencies from Parceljs website)
+    - Jest Configuration => npx jest --init
+    - install jsdom library (if jest version is greater than 28)
